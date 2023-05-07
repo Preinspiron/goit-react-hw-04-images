@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Items from '../imageGalleryItem/imageGalleryItem';
 
 const ImageGallery = ({ response, onClick }) => {
@@ -11,6 +12,10 @@ const ImageGallery = ({ response, onClick }) => {
     />
   ));
   return <ul className="ImageGallery">{items}</ul>;
+};
+ImageGallery.propTypes = {
+  response: PropTypes.array,
+  onClick: PropTypes.func,
 };
 
 export default ImageGallery;

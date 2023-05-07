@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 class Modal extends Component {
   handleClose = e => {
@@ -28,4 +29,7 @@ class Modal extends Component {
   }
 }
 
+Modal.propTypes = {
+  OnClose: PropTypes.func,
+};
 export default Modal;

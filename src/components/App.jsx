@@ -16,13 +16,7 @@ export class App extends Component {
     page: 1,
     largeimg: '',
   };
-  // const modal = document.querySelector('.modal')
-  // componentDidUpdate(_, prevState) {
-  // if()
-  // if (prevState.data !== this.state.data) {
-  // this.setState({ page: 1 });
-  // }
-  // }
+
   handleSubmit = async () => {
     this.setState({ loader: true, data: [], page: 1 });
 
