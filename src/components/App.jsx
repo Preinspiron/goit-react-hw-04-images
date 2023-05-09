@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import axios from './APIs/axios';
+import axios from '../APIs/axios';
 import Searchbar from '../components/searchbar/Searchbar';
 import Modal from '../components/modal/modal';
 import ImageGallery from '../components/imageGallery/imageGallery';
@@ -11,22 +11,32 @@ export class App extends Component {
     data: [],
     filter: '',
     loader: false,
-    loadmore: false,
     showModal: false,
-    page: 1,
+    page: 0,
     largeimg: '',
   };
 
+  async componentDidUpdate(_, prevState) {
+    const { page, loader } = this.state;
+    console.log(prevState.page, page);
+    try {
+      if (loader) {
+        const responseData = await axios({
+          params: { page, q: this.state.filter },
+        });
+        this.setState(({ data }) => ({
+          data: [...data, ...responseData.data.hits],
+        }));
+        console.log(prevState.page, page);
+        this.setState({ loader: false });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   handleSubmit = async () => {
     this.setState({ loader: true, data: [], page: 1 });
-
-    const response = await axios({ params: { q: this.state.filter } });
-    const {
-      data: { hits },
-    } = response;
-    this.setState(() => ({ data: hits, page: this.state.page + 1 }));
-
-    this.setState({ loader: false });
   };
 
   onChange = e => {
@@ -39,19 +49,8 @@ export class App extends Component {
       this.setState({ largeimg: e.target.dataset.largeimg });
   };
 
-  loadMore = async () => {
-    try {
-      this.setState(({ page }) => ({ page: page + 1 }));
-      const responseData = await axios({
-        params: { page: this.state.page, q: this.state.filter },
-      });
-      this.setState(({ data }) => ({
-        data: [...data, ...responseData.data.hits],
-      }));
-      console.log(responseData);
-    } catch (error) {
-      console.log(error);
-    }
+  loadMore = async a => {
+    this.setState(({ page, loader }) => ({ page: page + 1, loader: true }));
   };
 
   handlemodal = e => {
@@ -61,27 +60,22 @@ export class App extends Component {
   render() {
     const { handleSubmit, onChange } = this;
     const { filter, showModal, loader, data } = this.state;
-    console.log(loader);
-    const loadmoreBtn = data.length > 1;
     const largeIMG = this.state.largeimg;
+
     return (
       <div className="container">
         {showModal && <Modal large={largeIMG} onClose={this.toggleModal} />}
 
         <Searchbar onSubmit={handleSubmit} value={filter} onChange={onChange} />
-        <ImageGallery response={data} onClick={this.toggleModal} />
+        <ImageGallery response={data} onclick={this.toggleModal} />
         <Triangle
-          // height="80"
-          // width="80"
-          // color="#4fa94d"
           ariaLabel="triangle-loading"
-          // wrapperStyle={{}}
           wrapperClassName=""
           visible={loader}
         />
-        {loadmoreBtn && (
+        {data.length >= 12 && (
           <button type="button" onClick={this.loadMore} className="Button">
-            load more
+            {loader ? 'laoding...' : 'load more'}
           </button>
         )}
       </div>

@@ -31,5 +31,6 @@ class Modal extends Component {
 
 Modal.propTypes = {
   OnClose: PropTypes.func,
+  large: PropTypes.string,
 };
 export default Modal;

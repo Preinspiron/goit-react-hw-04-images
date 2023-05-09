@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import Items from '../imageGalleryItem/imageGalleryItem';
 
-const ImageGallery = ({ response, onClick }) => {
+const ImageGallery = ({ response, onclick }) => {
   const items = response.map(({ webformatURL, largeImageURL, tags }, index) => (
     <Items
       key={index}
       webformatURL={webformatURL}
-      onClick={onClick}
+      onClick={onclick}
       tags={tags}
       largeImageURL={largeImageURL}
     />
