@@ -35,7 +35,7 @@ export class App extends Component {
     }
   }
 
-  handleSubmit = async () => {
+  handleSubmit = () => {
     this.setState({ loader: true, data: [], page: 1 });
   };
 
@@ -49,7 +49,7 @@ export class App extends Component {
       this.setState({ largeimg: e.target.dataset.largeimg });
   };
 
-  loadMore = async a => {
+  loadMore = a => {
     this.setState(({ page, loader }) => ({ page: page + 1, loader: true }));
   };
 
