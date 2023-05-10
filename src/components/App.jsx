@@ -11,49 +11,38 @@ export const App = () => {
   const [filter, setFilter] = useState('');
   const [loader, setLoader] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [largeimg, setLargeimg] = useState('');
 
   useEffect(() => {
-    console.log(filter);
     filter &&
       axios({ params: { page, q: filter, per_page: 12 } })
         .then(r => setData(pr => [...pr, ...r.data.hits]))
         .catch(console.log)
         .finally(setLoader(false));
-  }, [page, loader]);
+  }, [page, filter]);
 
-  // function modal() {
-  //   console.log(modalRef);
-  // }
-  const handleSubmit = () => {
+  const handleSubmit = search => {
+    setFilter(search);
     setLoader(true);
     setData([]);
     setPage(1);
-    console.log(this);
-  };
-  const onChange = e => {
-    console.log(this);
-    setFilter(e.target.value);
   };
 
   function toggleModal(e) {
-    console.log(this);
     setShowModal(modal => !modal);
     if (!showModal) setLargeimg(e.target.dataset.largeimg);
   }
 
   const loadMore = a => {
     setPage(pr => pr + 1);
-    setLoader(true);
-    // console.log(modalRef);
   };
 
   return (
     <div className="container">
       {showModal && <Modal large={largeimg} onClose={toggleModal} />}
 
-      <Searchbar onSubmit={handleSubmit} value={filter} onChange={onChange} />
+      <Searchbar onSubmit={handleSubmit} value={filter} />
       <ImageGallery response={data} onclick={toggleModal} />
       <Triangle
         ariaLabel="triangle-loading"
