@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useImage } from 'components/imageGallery/imageGallery';
+import { useImage } from '../components/imageGallery/imageGallery';
 const ImageGalleryItem = ({
   webformatURL,
   largeImageURL,
