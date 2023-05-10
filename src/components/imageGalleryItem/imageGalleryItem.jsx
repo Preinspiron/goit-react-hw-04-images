@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useImage } from '../components/imageGallery/imageGallery';
 const ImageGalleryItem = ({
   webformatURL,
   largeImageURL,
@@ -10,7 +9,6 @@ const ImageGalleryItem = ({
 }) => {
   const modalRef = useRef(largeImageURL);
 
-  console.log(useImage());
   return (
     <li key={index} className="ImageGalleryItem">
       <img
