@@ -243,8 +243,3 @@ img {
   height: 100px;
   transform: translateY(200%);
 }
-
-.container {
-  /* display: flex; */
-  /* justify-content: center; */
-}
