@@ -9,9 +9,7 @@ const ImageGalleryItem = ({
   index,
 }) => {
   const modalRef = useRef(largeImageURL);
-  // console.log(modalRef);
-  // const largeImage = useContext(Image);
-  // console.log(largeImage);
+
   console.log(useImage());
   return (
     <li key={index} className="ImageGalleryItem">
