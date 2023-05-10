@@ -4,8 +4,8 @@ import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
 
 const Searchbar = ({ onSubmit, onChange, value }) => {
   const handleSubmit = (values, actions) => {
-    console.log(values);
-    console.log(actions);
+    // console.log(values);
+    // console.log(actions);
     onSubmit(values.search);
   };
   // const formikChange = value => {
