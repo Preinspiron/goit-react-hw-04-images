@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
 
-const Searchbar = ({ onSubmit, value }) => {
+const Searchbar = ({ onSubmit }) => {
   const handleSubmit = (values, actions) => {
     console.log(values);
     console.log(actions);
@@ -38,6 +38,6 @@ export default Searchbar;
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func,
-  onChange: PropTypes.func,
-  value: PropTypes.string,
+  // onChange: PropTypes.func,
+  // value: PropTypes.string,
 };
