@@ -20,7 +20,7 @@ export const App = () => {
         .then(r => setData(pr => [...pr, ...r.data.hits]))
         .catch(console.log)
         .finally(setLoader(false));
-  }, [page, filter, data]);
+  }, [page, filter]);
 
   const handleSubmit = search => {
     setFilter(search);
